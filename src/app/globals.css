@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/* QRC HVAC & Refrigeration — Brand tokens
+ * Scraped from qrc123.com (2026-04-24): light theme, blue-first palette.
+ * Primary brand wordmark is blue on transparent — header must be LIGHT.
+ * HVAC trade vertical: trust + professional + a touch of warmth (amber accent).
+ */
+@theme {
+  /* Brand colors */
+  --color-primary: #0e60c3;           /* QRC brand blue (scraped from wordmark) */
+  --color-primary-hover: #0a4fa3;
+  --color-primary-50: #eaf2fc;
+  --color-primary-100: #cfe0f8;
+  --color-primary-200: #9fc1f0;
+  --color-primary-700: #083a7a;
+
+  --color-accent: #0a2a4e;            /* deep navy — dark section bg */
+  --color-accent-hover: #071f3b;
+
+  --color-amber: #f6b704;             /* warm accent (CTAs on dark, highlights) */
+  --color-amber-hover: #d79f00;
+  --color-amber-50: #fdf4d4;
+  --color-amber-100: #fbe89c;
+
+  --color-danger: #e54335;            /* used only for emergency callout */
+
+  /* Surface */
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5f8fc;       /* cool light grey */
+  --color-surface-cool: #eaf2fc;      /* tinted blue (form bg) */
+  --color-surface-dark: #0a2a4e;      /* navy dark sections */
+  --color-ink: #0b1a2b;
+  --color-ink-muted: #4b5668;
+  --color-ink-on-dark: rgba(255, 255, 255, 0.88);
+  --color-line: #d7deea;
+
+  /* Fonts */
+  --font-display: var(--font-display-inter);
+  --font-body: var(--font-body-inter);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0b1a2b;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display-inter), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+.eyebrow {
+  font-family: var(--font-body-inter), sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--color-primary);
+}
+
+.eyebrow-on-dark {
+  color: var(--color-amber);
+}
+
+/* Subtle pinstripe for navy sections */
+.bg-pinstripe-navy {
+  background-color: var(--color-surface-dark);
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 18px
+    );
+}
+
+/* Soft cool gradient for hero bg */
+.bg-hero-cool {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(14, 96, 195, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 90%, rgba(246, 183, 4, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f5f8fc 100%);
+}
