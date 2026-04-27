@@ -10,7 +10,7 @@ import { useCallback, useEffect, useRef } from "react";
 
 const DEFAULTS = {
   CUSTOMER_ID: "4f6d4525-4490-42ea-99c7-ecf6f1b42b55", // QRC HVAC & Refrigeration
-  SITE_ID: "__QRC_SITE_ID_PLACEHOLDER__",
+  SITE_ID: "fc9277eb-eacd-4681-b3bb-a4653906fec4",
   ENDPOINT: "https://analytics.gomega.ai/submission/submit",
 };
 

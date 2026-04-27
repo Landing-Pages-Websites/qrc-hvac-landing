@@ -50,11 +50,11 @@ export default function RootLayout({
             won't fire events until real keys are in place. */}
         <meta
           name="mega-site-id"
-          content="__QRC_SITE_ID_PLACEHOLDER__"
+          content="fc9277eb-eacd-4681-b3bb-a4653906fec4"
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.MEGA_TAG_CONFIG={siteKey:"__QRC_SITE_KEY_PLACEHOLDER__",siteId:"__QRC_SITE_ID_PLACEHOLDER__",gtmId:"GTM-NSMDWR4B",pixelId:""};window.API_ENDPOINT="https://optimizer.gomega.ai";window.TRACKING_API_ENDPOINT="https://events-api.gomega.ai";`,
+            __html: `window.MEGA_TAG_CONFIG={siteKey:"sk_moggs3dj_tjkt5qb1p9",siteId:"fc9277eb-eacd-4681-b3bb-a4653906fec4",gtmId:"GTM-NSMDWR4B",pixelId:""};window.API_ENDPOINT="https://optimizer.gomega.ai";window.TRACKING_API_ENDPOINT="https://events-api.gomega.ai";`,
           }}
         />
         <script

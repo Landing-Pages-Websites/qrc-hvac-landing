@@ -13,7 +13,7 @@ import { BRAND } from "@/lib/content";
 export function HeroSection() {
   // Backup tracking layer — primary config lives in layout.tsx <head>.
   // After Mega Admin registration swap the placeholder for real sk_ key.
-  useTracking({ siteKey: "__QRC_SITE_KEY_PLACEHOLDER__" });
+  useTracking({ siteKey: "sk_moggs3dj_tjkt5qb1p9" });
 
   return (
     <section
