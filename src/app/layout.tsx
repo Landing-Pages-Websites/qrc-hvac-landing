@@ -54,7 +54,7 @@ export default function RootLayout({
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.MEGA_TAG_CONFIG={siteKey:"__QRC_SITE_KEY_PLACEHOLDER__",siteId:"__QRC_SITE_ID_PLACEHOLDER__",gtmId:"",pixelId:""};window.API_ENDPOINT="https://optimizer.gomega.ai";window.TRACKING_API_ENDPOINT="https://events-api.gomega.ai";`,
+            __html: `window.MEGA_TAG_CONFIG={siteKey:"__QRC_SITE_KEY_PLACEHOLDER__",siteId:"__QRC_SITE_ID_PLACEHOLDER__",gtmId:"GTM-NSMDWR4B",pixelId:""};window.API_ENDPOINT="https://optimizer.gomega.ai";window.TRACKING_API_ENDPOINT="https://events-api.gomega.ai";`,
           }}
         />
         <script
@@ -62,8 +62,24 @@ export default function RootLayout({
           src="https://cdn.gomega.ai/scripts/optimizer.min.js"
           async
         />
+        {/* Google Tag Manager — scraped from live qrc123.com page (GTM-NSMDWR4B) */}
+        <script
+          id="gtm-init"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NSMDWR4B');`,
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col bg-[var(--color-surface)] text-[var(--color-ink)]">
+        {/* GTM noscript fallback */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NSMDWR4B"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <QueryParamPersistence />
         {children}
         {/* CallTrackingMetrics — universal MEGA account */}

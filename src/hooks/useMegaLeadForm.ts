@@ -194,13 +194,12 @@ export function useMegaLeadForm(
         }
         formData.phone = phoneDigits;
       }
-      // QRC uses fullName (single field) per live page spec — accept it
-      // or firstName/lastName depending on form variant.
+      // QRC live page uses `name` (single field). Accept name, fullName, or firstName for flexibility.
       if (!formData.email) {
         throw new Error("email is required");
       }
-      if (!formData.fullName && !formData.firstName) {
-        throw new Error("fullName or firstName is required");
+      if (!formData.name && !formData.fullName && !formData.firstName) {
+        throw new Error("name is required");
       }
 
       const attribution = initAttribution();

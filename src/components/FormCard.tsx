@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useMegaLeadForm } from "@/hooks/useMegaLeadForm";
-import { BRAND, SERVICE_OPTIONS, type ServiceValue } from "@/lib/content";
+import { BRAND } from "@/lib/content";
 
 type Props = {
   variant?: "hero" | "card";
@@ -13,13 +13,13 @@ type Props = {
 
 /**
  * QRC HVAC lead form. Fields match the live page at
- * https://schedule.qrc123.com/schedule-now exactly:
- *   - fullName (single)  required
+ * https://schedule.qrc123.com/schedule-now EXACTLY:
+ *   - name (single)      required
  *   - email              required
  *   - phone              required (10-digit US, auto-formatted)
- *   - service (select)   required — 5 options
  *   - message (textarea) optional
  *
+ * Submit button label: "Submit Request" (matches live).
  * Each field is its own key in form_data (per landing-page-forms Rule #2).
  * Submit button disables after success to prevent duplicate submissions
  * (per landing-page-builder Rule #12).
@@ -33,21 +33,6 @@ function formatPhone(value: string): string {
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
 }
 
-const ChevronDown = () => (
-  <svg
-    className="w-5 h-5 text-[var(--color-ink-muted)]"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-  </svg>
-);
-
 export function FormCard({
   variant = "card",
   heading = "Schedule service now",
@@ -56,10 +41,9 @@ export function FormCard({
 }: Props) {
   const { submit } = useMegaLeadForm();
 
-  const [fullName, setFullName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [service, setService] = useState<ServiceValue | "">("");
   const [message, setMessage] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
@@ -69,10 +53,9 @@ export function FormCard({
   const phoneDigits = phone.replace(/\D/g, "");
   const phoneValid = phoneDigits.length === 10;
   const canSubmit =
-    fullName.trim().length >= 2 &&
+    name.trim().length >= 2 &&
     /@.+\./.test(email) &&
-    phoneValid &&
-    service.length > 0;
+    phoneValid;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -82,10 +65,9 @@ export function FormCard({
     setSubmitting(true);
     try {
       await submit({
-        fullName: fullName.trim(),
+        name: name.trim(),
         email: email.trim(),
         phone: phoneDigits,
-        service,
         message: message.trim(),
       });
     } catch (err) {
@@ -124,7 +106,7 @@ export function FormCard({
             </svg>
           </div>
           <h3 className="text-2xl font-bold text-[var(--color-accent)]">
-            Thanks, {fullName.split(" ")[0] || "we got it"}!
+            Thanks, {name.split(" ")[0] || "we got it"}!
           </h3>
           <p className="text-[var(--color-ink-muted)] max-w-sm mx-auto">
             A QRC expert will follow up shortly. For immediate service, call{" "}
@@ -161,18 +143,18 @@ export function FormCard({
 
       <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
         <div>
-          <label htmlFor={`fullName-${idSuffix}`} className="sr-only">
+          <label htmlFor={`name-${idSuffix}`} className="sr-only">
             Full name
           </label>
           <input
-            id={`fullName-${idSuffix}`}
-            name="fullName"
+            id={`name-${idSuffix}`}
+            name="name"
             type="text"
             autoComplete="name"
             required
-            placeholder="Full name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            placeholder="John Doe"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className={inputClass}
           />
         </div>
@@ -187,7 +169,7 @@ export function FormCard({
             type="email"
             autoComplete="email"
             required
-            placeholder="Email address"
+            placeholder="john.doe@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={inputClass}
@@ -207,43 +189,11 @@ export function FormCard({
             required
             pattern="\(\d{3}\) \d{3}-\d{4}"
             title="Enter a 10-digit US phone number"
-            placeholder="Phone number"
+            placeholder="(555) 555-5555"
             value={phone}
             onChange={(e) => setPhone(formatPhone(e.target.value))}
             className={inputClass}
           />
-        </div>
-
-        <div className="relative">
-          <label htmlFor={`service-${idSuffix}`} className="sr-only">
-            Service needed
-          </label>
-          <select
-            id={`service-${idSuffix}`}
-            name="service"
-            required
-            value={service}
-            onChange={(e) => setService(e.target.value as ServiceValue)}
-            className={`${inputClass} appearance-none pr-10 ${
-              service === "" ? "text-[var(--color-ink-muted)]" : ""
-            }`}
-          >
-            <option value="" disabled>
-              Service needed
-            </option>
-            {SERVICE_OPTIONS.map((opt) => (
-              <option
-                key={opt.value}
-                value={opt.value}
-                className="text-[var(--color-ink)]"
-              >
-                {opt.label}
-              </option>
-            ))}
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <ChevronDown />
-          </div>
         </div>
 
         <div>
@@ -253,8 +203,8 @@ export function FormCard({
           <textarea
             id={`message-${idSuffix}`}
             name="message"
-            rows={3}
-            placeholder="Your message (optional) — tell us what's going on"
+            rows={4}
+            placeholder="Tell us more about your needs..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className={inputClass}
@@ -266,7 +216,7 @@ export function FormCard({
           disabled={!canSubmit || submitting || submitted}
           className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] disabled:opacity-60 disabled:cursor-not-allowed text-white px-6 py-3.5 rounded-lg font-bold text-base transition shadow-sm mt-1"
         >
-          {submitting ? "Submitting…" : BRAND.primaryCtaLabel}
+          {submitting ? "Submitting…" : "Submit Request"}
         </button>
 
         <p className="text-[11px] text-[var(--color-ink-muted)] text-center leading-relaxed pt-1">
