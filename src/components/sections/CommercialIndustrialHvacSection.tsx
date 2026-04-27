@@ -10,7 +10,7 @@ export function CommercialIndustrialHvacSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <Reveal>
-            <p className="eyebrow">Service Pillar 03</p>
+            <p className="eyebrow">Commercial &amp; Industrial</p>
             <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-[var(--color-accent)] leading-tight">
               Commercial &amp; Industrial HVAC
             </h2>

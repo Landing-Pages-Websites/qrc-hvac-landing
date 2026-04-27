@@ -11,7 +11,7 @@ export function ResidentialHvacSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <Reveal>
-            <p className="eyebrow">Service Pillar 01</p>
+            <p className="eyebrow">Residential</p>
             <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-[var(--color-accent)] leading-tight">
               Residential HVAC Services
             </h2>

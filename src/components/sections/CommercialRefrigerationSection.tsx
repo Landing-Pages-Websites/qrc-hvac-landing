@@ -122,7 +122,7 @@ export function CommercialRefrigerationSection() {
           </Reveal>
 
           <Reveal className="lg:order-1">
-            <p className="eyebrow eyebrow-on-dark">Service Pillar 02</p>
+            <p className="eyebrow eyebrow-on-dark">Commercial Refrigeration</p>
             <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white leading-tight">
               Commercial Refrigeration
             </h2>
