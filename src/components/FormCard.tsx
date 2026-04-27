@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useMegaLeadForm } from "@/hooks/useMegaLeadForm";
-import { BRAND } from "@/lib/content";
+import { BRAND, SERVICE_OPTIONS, type ServiceValue } from "@/lib/content";
 
 type Props = {
   variant?: "hero" | "card";
@@ -14,10 +14,13 @@ type Props = {
 /**
  * QRC HVAC lead form. Fields match the live page at
  * https://schedule.qrc123.com/schedule-now EXACTLY:
- *   - name (single)      required
- *   - email              required
- *   - phone              required (10-digit US, auto-formatted)
- *   - message (textarea) optional
+ *   - name (single)      required — "Full Name*" / placeholder "John Doe"
+ *   - email              required — "Email*" / "john.doe@example.com"
+ *   - phone              required — "Phone Number*" / "(555) 555-5555"
+ *   - service (select)   required — "Service Needed*" / "Select a service"
+ *                        Options: Residential HVAC Service, Commercial HVAC Service,
+ *                        Commercial Refrigeration Service, Comfort Club Inquiry, Other
+ *   - message (textarea) optional — "Your Message" / "Tell us more about your needs..."
  *
  * Submit button label: "Submit Request" (matches live).
  * Each field is its own key in form_data (per landing-page-forms Rule #2).
@@ -33,6 +36,21 @@ function formatPhone(value: string): string {
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
 }
 
+const ChevronDown = () => (
+  <svg
+    className="w-5 h-5 text-[var(--color-ink-muted)]"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+  </svg>
+);
+
 export function FormCard({
   variant = "card",
   heading = "Schedule service now",
@@ -44,6 +62,7 @@ export function FormCard({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [service, setService] = useState<ServiceValue | "">("");
   const [message, setMessage] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
@@ -55,7 +74,8 @@ export function FormCard({
   const canSubmit =
     name.trim().length >= 2 &&
     /@.+\./.test(email) &&
-    phoneValid;
+    phoneValid &&
+    service.length > 0;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -68,6 +88,7 @@ export function FormCard({
         name: name.trim(),
         email: email.trim(),
         phone: phoneDigits,
+        service,
         message: message.trim(),
       });
     } catch (err) {
@@ -194,6 +215,38 @@ export function FormCard({
             onChange={(e) => setPhone(formatPhone(e.target.value))}
             className={inputClass}
           />
+        </div>
+
+        <div className="relative">
+          <label htmlFor={`service-${idSuffix}`} className="sr-only">
+            Service Needed
+          </label>
+          <select
+            id={`service-${idSuffix}`}
+            name="service"
+            required
+            value={service}
+            onChange={(e) => setService(e.target.value as ServiceValue)}
+            className={`${inputClass} appearance-none pr-10 ${
+              service === "" ? "text-[var(--color-ink-muted)]" : ""
+            }`}
+          >
+            <option value="" disabled>
+              Select a service
+            </option>
+            {SERVICE_OPTIONS.map((opt) => (
+              <option
+                key={opt.value}
+                value={opt.value}
+                className="text-[var(--color-ink)]"
+              >
+                {opt.label}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <ChevronDown />
+          </div>
         </div>
 
         <div>

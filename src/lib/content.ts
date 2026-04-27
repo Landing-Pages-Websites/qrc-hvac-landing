@@ -23,15 +23,14 @@ export const BRAND = {
   comfortClubPrice: "$50/year per system",
 } as const;
 
+// Service Needed dropdown — exact options from live page
+// (https://schedule.qrc123.com/schedule-now, verified via DOM scrape 2026-04-27)
 export const SERVICE_OPTIONS = [
-  { value: "residential-hvac", label: "Residential HVAC" },
-  { value: "commercial-refrigeration", label: "Commercial Refrigeration" },
-  {
-    value: "commercial-industrial-hvac",
-    label: "Commercial & Industrial HVAC",
-  },
-  { value: "emergency", label: "Emergency Service" },
-  { value: "other", label: "Other" },
+  { value: "Residential HVAC Service", label: "Residential HVAC Service" },
+  { value: "Commercial HVAC Service", label: "Commercial HVAC Service" },
+  { value: "Commercial Refrigeration Service", label: "Commercial Refrigeration Service" },
+  { value: "Comfort Club Inquiry", label: "Comfort Club Inquiry" },
+  { value: "Other", label: "Other" },
 ] as const;
 
 export type ServiceValue = (typeof SERVICE_OPTIONS)[number]["value"];
