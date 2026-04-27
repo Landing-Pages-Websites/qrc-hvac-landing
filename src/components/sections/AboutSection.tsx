@@ -7,7 +7,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="py-20 sm:py-24 bg-white"
+      className="py-20 sm:py-24 bg-warm-tint"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -30,7 +30,7 @@ export function AboutSection() {
               the work right, and standing behind it.
             </p>
 
-            <div className="mt-7 grid grid-cols-3 gap-4 max-w-md">
+            <div className="mt-7 grid grid-cols-3 gap-3 max-w-md rounded-xl bg-white/70 backdrop-blur border border-[var(--color-line)] p-4 shadow-sm">
               <div>
                 <p className="text-3xl font-extrabold text-[var(--color-primary)]">
                   25+
@@ -61,7 +61,7 @@ export function AboutSection() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-[var(--color-line)] aspect-[4/3]">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[var(--color-accent)]/25 border-4 border-white ring-1 ring-[var(--color-primary)]/15 aspect-[4/3]">
               <Image
                 src="/images/qrc-building.png"
                 alt="QRC HVAC & Refrigeration headquarters in Winston-Salem"

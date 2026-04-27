@@ -11,7 +11,7 @@ export function FAQSection() {
   return (
     <section
       id="faq"
-      className="py-20 sm:py-24 bg-[var(--color-surface-alt)]"
+      className="py-20 sm:py-24 bg-blueprint"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <Reveal className="text-center">
@@ -32,7 +32,7 @@ export function FAQSection() {
               return (
                 <li
                   key={faq.q}
-                  className="rounded-xl bg-white border border-[var(--color-line)] overflow-hidden"
+                  className="rounded-xl bg-white border-2 border-[var(--color-line)] hover:border-[var(--color-primary)]/40 overflow-hidden shadow-sm transition"
                 >
                   <button
                     type="button"

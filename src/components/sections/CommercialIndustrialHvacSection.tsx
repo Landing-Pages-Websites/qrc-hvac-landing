@@ -5,7 +5,7 @@ export function CommercialIndustrialHvacSection() {
   return (
     <section
       id="commercial-industrial-hvac"
-      className="py-20 sm:py-24 bg-white"
+      className="py-20 sm:py-24 bg-blueprint"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -62,7 +62,7 @@ export function CommercialIndustrialHvacSection() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-[var(--color-line)] aspect-[4/3] bg-[var(--color-surface-alt)] p-10 flex items-center justify-center">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[var(--color-accent)]/30 border-4 border-white ring-1 ring-[var(--color-primary)]/20 aspect-[4/3] bg-svg-card-blue p-10 flex items-center justify-center">
               <svg
                 viewBox="0 0 400 320"
                 className="w-full h-full max-w-sm"
@@ -75,12 +75,12 @@ export function CommercialIndustrialHvacSection() {
                   y="140"
                   width="280"
                   height="140"
-                  fill="var(--color-surface-cool)"
-                  stroke="var(--color-primary)"
+                  fill="rgba(255,255,255,0.92)"
+                  stroke="var(--color-amber)"
                   strokeWidth="2"
                 />
                 {/* windows */}
-                <g fill="var(--color-primary)">
+                <g fill="var(--color-accent)">
                   <rect x="80" y="160" width="30" height="25" />
                   <rect x="120" y="160" width="30" height="25" />
                   <rect x="160" y="160" width="30" height="25" />
@@ -97,27 +97,27 @@ export function CommercialIndustrialHvacSection() {
                 </g>
                 {/* rooftop units */}
                 <g
-                  fill="var(--color-accent)"
+                  fill="rgba(255,255,255,0.95)"
                   stroke="var(--color-amber)"
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                 >
                   <rect x="90" y="110" width="60" height="30" rx="3" />
                   <rect x="180" y="100" width="70" height="40" rx="3" />
                   <rect x="280" y="115" width="50" height="25" rx="3" />
                 </g>
                 {/* fans on rooftop units */}
-                <g stroke="var(--color-amber)" strokeWidth="2" fill="none">
+                <g stroke="var(--color-amber)" strokeWidth="2.5" fill="none">
                   <circle cx="120" cy="125" r="8" />
                   <circle cx="215" cy="120" r="10" />
                   <circle cx="305" cy="127" r="7" />
                 </g>
                 {/* heat lines */}
                 <g
-                  stroke="var(--color-ink-muted)"
-                  strokeWidth="2"
+                  stroke="var(--color-amber)"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeDasharray="4 4"
-                  opacity="0.5"
+                  opacity="0.7"
                 >
                   <line x1="120" y1="100" x2="120" y2="70" />
                   <line x1="215" y1="90" x2="215" y2="50" />
@@ -129,10 +129,14 @@ export function CommercialIndustrialHvacSection() {
                   y1="285"
                   x2="370"
                   y2="285"
-                  stroke="var(--color-ink-muted)"
+                  stroke="rgba(255,255,255,0.5)"
                   strokeWidth="2"
                 />
               </svg>
+              {/* corner badge */}
+              <div className="absolute top-4 left-4 bg-[var(--color-amber)] text-[var(--color-accent)] px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider shadow-lg">
+                Industrial
+              </div>
             </div>
           </Reveal>
         </div>

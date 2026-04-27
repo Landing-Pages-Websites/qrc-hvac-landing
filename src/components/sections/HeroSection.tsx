@@ -18,22 +18,34 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative bg-hero-cool pt-24 pb-12 sm:pt-32 sm:pb-20 overflow-hidden"
+      className="relative bg-hero-photo pt-24 pb-16 sm:pt-32 sm:pb-24 overflow-hidden"
     >
+      {/* Soft amber accent glow, top-right */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(246, 183, 4, 0.18) 0%, transparent 70%)",
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-start">
-          <Reveal className="space-y-5 lg:pt-6">
-            <p className="eyebrow">
+          <Reveal className="space-y-5 lg:pt-6 relative">
+            <p className="eyebrow eyebrow-on-dark">
               Since {BRAND.since} · Winston-Salem, NC
             </p>
-            <h1 className="text-[2.25rem] sm:text-5xl lg:text-[3.5rem] font-extrabold text-[var(--color-accent)] leading-[1.05] tracking-tight">
+            <h1 className="text-[2.25rem] sm:text-5xl lg:text-[3.5rem] font-extrabold text-white leading-[1.05] tracking-tight drop-shadow-lg">
               {BRAND.tagline}
             </h1>
-            <p className="text-lg sm:text-xl text-[var(--color-ink-muted)] leading-relaxed max-w-xl">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed max-w-xl">
               Residential HVAC, commercial refrigeration, and commercial /
               industrial HVAC — all from one family-owned team. Licensed
-              technicians, 24/7/365 emergency response, and the Comfort Club
-              For Life at just {BRAND.comfortClubPrice}, locked for life.
+              technicians, 24/7/365 emergency response, and the{" "}
+              <span className="font-bold text-[var(--color-amber)]">
+                Comfort Club For Life
+              </span>
+              {" "}at just {BRAND.comfortClubPrice}, locked for life.
             </p>
             <ul className="space-y-2 pt-1 max-w-xl">
               {[
@@ -44,10 +56,10 @@ export function HeroSection() {
               ].map((line) => (
                 <li
                   key={line}
-                  className="flex items-start gap-2.5 text-[var(--color-ink)]"
+                  className="flex items-start gap-2.5 text-white"
                 >
                   <svg
-                    className="w-5 h-5 text-[var(--color-primary)] shrink-0 mt-0.5"
+                    className="w-5 h-5 text-[var(--color-amber)] shrink-0 mt-0.5"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -62,7 +74,7 @@ export function HeroSection() {
                 </li>
               ))}
             </ul>
-            <DualCTA align="start" className="!mt-6" />
+            <DualCTA align="start" variant="onDark" className="!mt-6" />
           </Reveal>
 
           <Reveal delay={150} className="lg:pt-0">

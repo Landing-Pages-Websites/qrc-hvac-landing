@@ -5,13 +5,13 @@ export function CommercialRefrigerationSection() {
   return (
     <section
       id="commercial-refrigeration"
-      className="py-20 sm:py-24 bg-[var(--color-surface-alt)]"
+      className="py-20 sm:py-24 bg-pinstripe-navy text-[var(--color-ink-on-dark)]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <Reveal delay={120} className="lg:order-2">
             {/* SVG illustration — walk-in cooler + ice machine */}
-            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-[var(--color-line)] bg-white aspect-[4/3] p-10 flex items-center justify-center">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border-4 border-white/10 ring-1 ring-[var(--color-amber)]/30 bg-svg-card-warm aspect-[4/3] p-10 flex items-center justify-center">
               <svg
                 viewBox="0 0 400 320"
                 className="w-full h-full max-w-sm"
@@ -25,8 +25,8 @@ export function CommercialRefrigerationSection() {
                   width="200"
                   height="210"
                   rx="6"
-                  fill="var(--color-primary-50)"
-                  stroke="var(--color-primary)"
+                  fill="rgba(255,255,255,0.95)"
+                  stroke="var(--color-amber)"
                   strokeWidth="3"
                 />
                 {/* door seam */}
@@ -35,7 +35,7 @@ export function CommercialRefrigerationSection() {
                   y1="90"
                   x2="140"
                   y2="270"
-                  stroke="var(--color-primary)"
+                  stroke="var(--color-accent)"
                   strokeWidth="2"
                 />
                 {/* handle */}
@@ -45,7 +45,7 @@ export function CommercialRefrigerationSection() {
                   width="8"
                   height="30"
                   rx="2"
-                  fill="var(--color-primary)"
+                  fill="var(--color-accent)"
                 />
                 {/* top vent */}
                 <rect
@@ -54,12 +54,12 @@ export function CommercialRefrigerationSection() {
                   width="120"
                   height="30"
                   rx="3"
-                  fill="var(--color-accent)"
+                  fill="var(--color-amber)"
                 />
                 {/* snowflake */}
                 <g
-                  stroke="var(--color-primary)"
-                  strokeWidth="2.5"
+                  stroke="var(--color-accent)"
+                  strokeWidth="3"
                   strokeLinecap="round"
                 >
                   <line x1="195" y1="160" x2="215" y2="180" />
@@ -74,7 +74,7 @@ export function CommercialRefrigerationSection() {
                   width="100"
                   height="140"
                   rx="4"
-                  fill="var(--color-accent)"
+                  fill="rgba(255,255,255,0.95)"
                   stroke="var(--color-amber)"
                   strokeWidth="2"
                 />
@@ -84,7 +84,7 @@ export function CommercialRefrigerationSection() {
                   width="80"
                   height="50"
                   rx="2"
-                  fill="var(--color-primary-50)"
+                  fill="var(--color-primary-100)"
                 />
                 {/* ice cubes */}
                 <g fill="var(--color-amber)">
@@ -110,26 +110,30 @@ export function CommercialRefrigerationSection() {
                   y1="285"
                   x2="380"
                   y2="285"
-                  stroke="var(--color-ink-muted)"
+                  stroke="rgba(255,255,255,0.5)"
                   strokeWidth="2"
                 />
               </svg>
+              {/* corner badge */}
+              <div className="absolute top-4 left-4 bg-[var(--color-amber)] text-[var(--color-accent)] px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider shadow-lg">
+                Refrigeration
+              </div>
             </div>
           </Reveal>
 
           <Reveal className="lg:order-1">
-            <p className="eyebrow">Service Pillar 02</p>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-[var(--color-accent)] leading-tight">
+            <p className="eyebrow eyebrow-on-dark">Service Pillar 02</p>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white leading-tight">
               Commercial Refrigeration
             </h2>
-            <p className="mt-5 text-base sm:text-lg text-[var(--color-ink-muted)] leading-relaxed">
+            <p className="mt-5 text-base sm:text-lg text-white/85 leading-relaxed">
               Full-service commercial refrigeration: install, repair, and
               maintenance. Custom walk-in cooler design and sales, ice
               machines, and ice makers. We keep inventory cold, safe, and
               code-compliant across restaurants, convenience stores, and
               cold-storage facilities throughout North and South Carolina.
             </p>
-            <p className="mt-4 text-base text-[var(--color-ink-muted)] leading-relaxed">
+            <p className="mt-4 text-base text-white/75 leading-relaxed">
               Downtime costs more than a repair. QRC technicians are
               trained on all major commercial refrigeration brands and
               arrive with the right parts and refrigerants to get your
@@ -146,10 +150,10 @@ export function CommercialRefrigerationSection() {
               ].map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-2 text-[var(--color-ink)]"
+                  className="flex items-start gap-2 text-white"
                 >
                   <svg
-                    className="w-4 h-4 text-[var(--color-primary)] shrink-0 mt-1"
+                    className="w-4 h-4 text-[var(--color-amber)] shrink-0 mt-1"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -165,7 +169,11 @@ export function CommercialRefrigerationSection() {
               ))}
             </ul>
 
-            <DualCTA align="start" label="Schedule Refrigeration Service" />
+            <DualCTA
+              align="start"
+              variant="onDark"
+              label="Schedule Refrigeration Service"
+            />
           </Reveal>
         </div>
       </div>

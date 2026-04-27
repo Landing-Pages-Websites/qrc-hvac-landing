@@ -6,16 +6,16 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-20 sm:py-24 bg-white"
+      className="relative py-20 sm:py-24 bg-navy-deep text-white overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <Reveal>
-            <p className="eyebrow">Get in touch</p>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-[var(--color-accent)] leading-tight">
+            <p className="eyebrow eyebrow-on-dark">Get in touch</p>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white leading-tight">
               Ready to schedule? Let's get you on the calendar.
             </h2>
-            <p className="mt-5 text-base sm:text-lg text-[var(--color-ink-muted)] leading-relaxed">
+            <p className="mt-5 text-base sm:text-lg text-white/85 leading-relaxed">
               Fill out the form and a QRC expert will follow up shortly to
               schedule your service or enroll you in the Comfort Club. For
               immediate service or an after-hours emergency, call us — we
@@ -25,9 +25,9 @@ export function ContactSection() {
             <div className="mt-7 space-y-5">
               <a
                 href={BRAND.phoneHref}
-                className="flex items-start gap-4 rounded-xl border-2 border-[var(--color-primary)] bg-[var(--color-primary-50)] p-5 hover:bg-[var(--color-primary-100)] transition group"
+                className="flex items-start gap-4 rounded-xl border-2 border-[var(--color-amber)] bg-white/5 backdrop-blur p-5 hover:bg-white/10 transition group"
               >
-                <div className="w-11 h-11 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center shrink-0">
+                <div className="w-11 h-11 rounded-full bg-[var(--color-amber)] text-[var(--color-accent)] flex items-center justify-center shrink-0">
                   <svg
                     className="w-5 h-5"
                     viewBox="0 0 24 24"
@@ -42,20 +42,20 @@ export function ContactSection() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider">
+                  <p className="text-xs font-bold text-[var(--color-amber)] uppercase tracking-wider">
                     Call 24/7
                   </p>
-                  <p className="mt-0.5 text-xl sm:text-2xl font-extrabold text-[var(--color-accent)]">
+                  <p className="mt-0.5 text-xl sm:text-2xl font-extrabold text-white">
                     {BRAND.phoneDisplay}
                   </p>
-                  <p className="mt-1 text-xs text-[var(--color-ink-muted)]">
+                  <p className="mt-1 text-xs text-white/70">
                     Residential &amp; commercial emergency response
                   </p>
                 </div>
               </a>
 
-              <div className="flex items-start gap-4 rounded-xl border border-[var(--color-line)] p-5">
-                <div className="w-11 h-11 rounded-full bg-[var(--color-amber-50)] text-[var(--color-primary)] flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-4 rounded-xl border border-white/15 bg-white/5 backdrop-blur p-5">
+                <div className="w-11 h-11 rounded-full bg-[var(--color-amber)]/20 border border-[var(--color-amber)]/40 text-[var(--color-amber)] flex items-center justify-center shrink-0">
                   <svg
                     className="w-5 h-5"
                     viewBox="0 0 24 24"
@@ -71,14 +71,14 @@ export function ContactSection() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider">
+                  <p className="text-xs font-bold text-[var(--color-amber)] uppercase tracking-wider">
                     Service Area
                   </p>
-                  <p className="mt-0.5 text-base font-semibold text-[var(--color-accent)]">
+                  <p className="mt-0.5 text-base font-semibold text-white">
                     Serving Winston-Salem and the Triad for residential ·
                     NC + SC for commercial
                   </p>
-                  <p className="mt-1 text-xs text-[var(--color-ink-muted)]">
+                  <p className="mt-1 text-xs text-white/70">
                     Based in {BRAND.basedIn} · Since {BRAND.since}
                   </p>
                 </div>

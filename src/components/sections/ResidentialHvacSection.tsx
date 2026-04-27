@@ -6,7 +6,7 @@ export function ResidentialHvacSection() {
   return (
     <section
       id="residential-hvac"
-      className="py-20 sm:py-24 bg-white"
+      className="py-20 sm:py-24 bg-cool-tint"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -62,7 +62,7 @@ export function ResidentialHvacSection() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-[var(--color-line)] aspect-[4/3]">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[var(--color-accent)]/20 border-4 border-white aspect-[4/3] ring-1 ring-[var(--color-primary)]/15">
               <Image
                 src="/images/ac-repair.webp"
                 alt="QRC technician performing AC repair"
@@ -70,6 +70,10 @@ export function ResidentialHvacSection() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
+              {/* corner badge */}
+              <div className="absolute top-4 left-4 bg-[var(--color-accent)] text-white px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider shadow-lg">
+                Residential
+              </div>
             </div>
           </Reveal>
         </div>
