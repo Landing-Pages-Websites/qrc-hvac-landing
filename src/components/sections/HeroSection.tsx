@@ -47,6 +47,44 @@ export function HeroSection() {
               </span>
               {" "}at just {BRAND.comfortClubPrice}, locked for life.
             </p>
+            {/*
+              H2 + service chips — added 2026-05-13 for QS remediation (task
+              31396ac7). Mirrors high-volume repair keywords above the fold so
+              the LP Experience score improves on AC/HVAC/heat pump repair
+              search terms.
+            */}
+            <div className="space-y-3 pt-1">
+              <h2 className="text-lg sm:text-xl font-bold text-[var(--color-amber)] uppercase tracking-wide">
+                AC Repair &amp; HVAC Repair
+              </h2>
+              <ul className="flex flex-wrap gap-2 max-w-xl" aria-label="Repair services offered">
+                {[
+                  "AC Repair",
+                  "Furnace Repair",
+                  "Heat Pump Repair",
+                  "Mini-Split Service",
+                ].map((svc) => (
+                  <li
+                    key={svc}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur ring-1 ring-white/30 px-3 py-1 text-xs sm:text-sm font-semibold text-white"
+                  >
+                    <svg
+                      className="w-3.5 h-3.5 text-[var(--color-amber)] shrink-0"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {svc}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <ul className="space-y-2 pt-1 max-w-xl">
               {[
                 "24/7/365 emergency response — residential, commercial, and industrial",
