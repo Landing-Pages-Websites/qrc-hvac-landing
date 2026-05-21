@@ -48,6 +48,43 @@ export function HeroSection() {
               {" "}at just {BRAND.comfortClubPrice}, locked for life.
             </p>
             {/*
+              Transparent pricing callout — added 2026-05-21 for QS remediation
+              (task 744acef0). Adds visible service-cost context above the fold
+              to address BELOW_AVERAGE Landing Page Experience scores on install
+              and repair keywords where users expect cost transparency.
+            */}
+            <div
+              id="transparent-pricing"
+              className="rounded-xl bg-white/10 backdrop-blur ring-1 ring-[var(--color-amber)]/60 px-4 py-3 sm:px-5 sm:py-4 max-w-xl"
+            >
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-lg bg-[var(--color-amber)]/25 flex items-center justify-center shrink-0">
+                  <svg
+                    className="w-5 h-5 text-[var(--color-amber)]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 2" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold text-white leading-tight">
+                    Transparent HVAC Pricing — Get a Real Quote
+                  </h3>
+                  <p className="mt-1.5 text-sm sm:text-base text-white/90 leading-relaxed">
+                    We quote before we start. No surprise fees. Call or book
+                    online for your free estimate.
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/*
               H2 + service chips — added 2026-05-13 for QS remediation (task
               31396ac7). Mirrors high-volume repair keywords above the fold so
               the LP Experience score improves on AC/HVAC/heat pump repair
