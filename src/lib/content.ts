@@ -20,7 +20,7 @@ export const BRAND = {
   residentialArea: "the Triad / Winston-Salem area",
   commercialArea: "throughout North and South Carolina",
   // Hook offer
-  comfortClubPrice: "$50/year per system",
+  comfortClubOffer: "Buy a Year, Get a Year Free",
 } as const;
 
 // Service Needed dropdown — exact options from live page
@@ -37,16 +37,16 @@ export type ServiceValue = (typeof SERVICE_OPTIONS)[number]["value"];
 
 export const FAQS: { q: string; a: string }[] = [
   {
-    q: "What is the Comfort Club For Life?",
-    a: "The Comfort Club For Life is our exclusive maintenance program, offering 2 seasonal tune-ups annually, priority service, guaranteed pricing, and a 15% discount on all repairs for just $50 per year per system, locked for life.",
+    q: "What is the Comfort Club?",
+    a: "The Comfort Club is our maintenance membership. Right now, when you buy a year you get a second year free — plus priority service, no overtime charges, 2 seasonal tune-ups each year, and 15% off all repairs.",
   },
   {
-    q: "What does the $50 Comfort Club membership include?",
-    a: "It includes two comprehensive seasonal tune-ups (Spring and Fall), priority service scheduling, guaranteed pricing on all services, and a 15% discount on any necessary repairs.",
+    q: "What does a Comfort Club membership include?",
+    a: "It includes two comprehensive seasonal tune-ups (Spring and Fall), priority service scheduling, no overtime charges, and a 15% discount on any necessary repairs. Join now and you'll get your second year free.",
   },
   {
     q: "How much can I save with the Comfort Club?",
-    a: "Members enjoy 75% savings on annual maintenance costs compared to non-member rates, plus 15% off all repairs.",
+    a: "With our current Buy a Year, Get a Year Free offer, your second year of membership is completely free. Members also skip overtime charges and get 15% off all repairs, so the savings add up fast.",
   },
   {
     q: "Do you offer emergency HVAC services?",

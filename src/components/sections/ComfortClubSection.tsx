@@ -11,16 +11,16 @@ const BENEFITS: { title: string; body: string }[] = [
     body: "When you call, members jump the line. No more waiting days for a technician when your system is down.",
   },
   {
-    title: "Guaranteed pricing — locked for life",
-    body: "Your $50/year rate never goes up. Your member discounts never shrink. Grandfather pricing is a promise, not a teaser.",
+    title: "Buy a year, get a year free",
+    body: "Sign up for one year of Comfort Club and your second year is on us — double the coverage, double the peace of mind, no extra cost.",
   },
   {
     title: "15% off all repairs",
     body: "Whenever you need a repair, parts and labor are discounted by 15% — typically paying for the membership in a single visit.",
   },
   {
-    title: "75% savings vs. non-member maintenance",
-    body: "The two included tune-ups alone cost roughly 4x the annual fee at standard rates. You save the other 75%.",
+    title: "No overtime charges",
+    body: "Members never pay overtime rates — nights, weekends, or holidays. When you need us most, you pay the same fair price.",
   },
 ];
 
@@ -36,15 +36,16 @@ export function ComfortClubSection() {
             The QRC Membership
           </p>
           <h2 className="mt-3 text-3xl sm:text-5xl font-extrabold text-white leading-tight">
-            Meet the Comfort Club For Life
+            Meet the Comfort Club
           </h2>
           <p className="mt-4 text-lg sm:text-2xl font-bold text-[var(--color-amber)]">
-            $50/year per system — locked for life
+            Buy a Year, Get a Year Free
           </p>
           <p className="mt-4 max-w-2xl mx-auto text-white/85 text-base sm:text-lg leading-relaxed">
-            One flat rate. Locked as long as you're a member. The most
-            affordable way to keep your HVAC running, extend equipment life,
-            and skip the worst-case breakdown bills.
+            Sign up today and get your second year of membership free. The
+            smartest way to keep your HVAC running, extend equipment life, and
+            skip the worst-case breakdown bills — with priority service and no
+            overtime charges built in.
           </p>
         </Reveal>
 

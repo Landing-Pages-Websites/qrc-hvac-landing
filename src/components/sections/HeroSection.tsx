@@ -127,7 +127,7 @@ export function HeroSection() {
                 "24/7/365 emergency response — residential, commercial, and industrial",
                 "Certified technicians on every call",
                 "Serving the Triad for residential · NC + SC for commercial",
-                "Comfort Club For Life — 75% maintenance savings vs. non-members",
+                "Comfort Club — buy a year, get a year free, plus 15% off repairs",
               ].map((line) => (
                 <li
                   key={line}

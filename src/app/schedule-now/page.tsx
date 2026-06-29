@@ -13,13 +13,13 @@ import { ContactSection } from "@/components/sections/ContactSection";
 
 export const metadata: Metadata = {
   title:
-    "QRC HVAC & Refrigeration — Winston-Salem NC · Residential + Commercial · Comfort Club For Life",
+    "QRC HVAC & Refrigeration — Winston-Salem NC · Residential + Commercial · Comfort Club",
   description:
-    "Carolina's most trusted HVAC and refrigeration company since 1999. Residential HVAC, commercial refrigeration, commercial/industrial HVAC. 24/7/365 emergency response. Join the Comfort Club For Life — $50/year locked for life.",
+    "Carolina's most trusted HVAC and refrigeration company since 1999. Residential HVAC, commercial refrigeration, commercial/industrial HVAC. 24/7/365 emergency response. Join the Comfort Club — buy a year, get a year free, plus priority service and 15% off repairs.",
   openGraph: {
     title: "QRC HVAC & Refrigeration — Carolina's Most Trusted HVAC Company",
     description:
-      "Residential HVAC, commercial refrigeration, commercial/industrial HVAC. 24/7/365 emergency response. Comfort Club For Life — $50/year locked for life.",
+      "Residential HVAC, commercial refrigeration, commercial/industrial HVAC. 24/7/365 emergency response. Comfort Club — buy a year, get a year free, plus 15% off repairs.",
     url: "https://qrc-hvac-landing.vercel.app/schedule-now",
     siteName: "QRC HVAC & Refrigeration",
     locale: "en_US",

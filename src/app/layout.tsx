@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | QRC HVAC & Refrigeration",
   },
   description:
-    "Residential HVAC, commercial refrigeration, and commercial/industrial HVAC services across NC and SC since 1999. 24/7/365 emergency response. Winston-Salem, NC. Join the Comfort Club For Life — $50/year per system, locked for life.",
+    "Residential HVAC, commercial refrigeration, and commercial/industrial HVAC services across NC and SC since 1999. 24/7/365 emergency response. Winston-Salem, NC. Join the Comfort Club — buy a year, get a year free, plus priority service, no overtime charges, and 15% off repairs.",
   icons: {
     icon: "/icon.png",
     apple: "/apple-icon.png",

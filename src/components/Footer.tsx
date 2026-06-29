@@ -16,10 +16,10 @@ export function Footer() {
         </p>
         <p className="text-[11px] text-white/55 leading-relaxed max-w-2xl mx-auto pt-2 border-t border-white/10">
           Licensed HVAC and refrigeration contractor. Service availability
-          varies by location and system type. Pricing examples (including
-          Comfort Club $50/year) shown on this page are current offers and
-          may change; member pricing is locked for the life of your
-          membership per program terms.
+          varies by location and system type. Promotional offers (including
+          the Comfort Club "Buy a Year, Get a Year Free" promotion) shown on
+          this page are current offers and may change; offer terms are
+          subject to program conditions.
         </p>
       </div>
     </footer>
