@@ -43,9 +43,9 @@ export function HeroSection() {
               industrial HVAC — all from one family-owned team. Licensed
               technicians, 24/7/365 emergency response, and the{" "}
               <span className="font-bold text-[var(--color-amber)]">
-                Comfort Club For Life
+                Comfort Club
               </span>
-              {" "}at just {BRAND.comfortClubPrice}, locked for life.
+              {" "}— Buy a Year, Get a Year Free, plus priority service, no overtime charges, and 15% off repairs.
             </p>
             {/*
               Transparent pricing callout — added 2026-05-21 for QS remediation
