@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useMegaLeadForm } from "@/hooks/useMegaLeadForm";
 import { BRAND, SERVICE_OPTIONS, type ServiceValue } from "@/lib/content";
+
+const SUBMIT_ERROR_MESSAGE =
+  "Something went wrong sending your request. Please try again, or email us at info@qrc123.com.";
 
 type Props = {
   variant?: "hero" | "card";
@@ -68,6 +71,7 @@ export function FormCard({
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const inFlightRef = useRef(false);
 
   const phoneDigits = phone.replace(/\D/g, "");
   const phoneValid = phoneDigits.length === 10;
@@ -80,22 +84,28 @@ export function FormCard({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (submitting || submitted) return;
+    if (inFlightRef.current) return;
     if (!canSubmit) return;
+    inFlightRef.current = true;
     setError(null);
     setSubmitting(true);
     try {
-      await submit({
+      const res = await submit({
         name: name.trim(),
         email: email.trim(),
         phone: phoneDigits,
         service,
         message: message.trim(),
       });
+      if (res?.ok !== true) {
+        throw new Error("Submission not confirmed by server.");
+      }
+      setSubmitted(true);
     } catch (err) {
       console.error("Form submission failed:", err);
-      setError("Something went wrong on our end — we also got your info.");
+      setError(SUBMIT_ERROR_MESSAGE);
     } finally {
-      setSubmitted(true);
+      inFlightRef.current = false;
       setSubmitting(false);
     }
   }
@@ -139,11 +149,6 @@ export function FormCard({
             </a>
             {" "}— we're available 24/7/365.
           </p>
-          {error && (
-            <p className="text-xs text-[var(--color-ink-muted)]">
-              (Note: {error})
-            </p>
-          )}
         </div>
       </div>
     );
@@ -263,6 +268,16 @@ export function FormCard({
             className={inputClass}
           />
         </div>
+
+        {error && (
+          <p
+            role="alert"
+            aria-live="polite"
+            className="rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700"
+          >
+            {error}
+          </p>
+        )}
 
         <button
           type="submit"
