@@ -72,6 +72,7 @@ export function FormCard({
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inFlightRef = useRef(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const phoneDigits = phone.replace(/\D/g, "");
   const phoneValid = phoneDigits.length === 10;
@@ -81,8 +82,7 @@ export function FormCard({
     phoneValid &&
     service.length > 0;
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  async function runSubmit(): Promise<void> {
     if (submitting || submitted) return;
     if (inFlightRef.current) return;
     if (!canSubmit) return;
@@ -100,6 +100,9 @@ export function FormCard({
       if (res?.ok !== true) {
         throw new Error("Submission not confirmed by server.");
       }
+      formRef.current?.dispatchEvent(
+        new Event("submit", { bubbles: true, cancelable: true }),
+      );
       setSubmitted(true);
     } catch (err) {
       console.error("Form submission failed:", err);
@@ -108,6 +111,16 @@ export function FormCard({
       inFlightRef.current = false;
       setSubmitting(false);
     }
+  }
+
+  function handleClick(): void {
+    const form = formRef.current;
+    if (!form) return;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    void runSubmit();
   }
 
   const wrapperClass =
@@ -167,7 +180,12 @@ export function FormCard({
         )}
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
+      <form
+        ref={formRef}
+        onSubmit={(e) => e.preventDefault()}
+        noValidate
+        className="space-y-3.5"
+      >
         <div>
           <label htmlFor={`name-${idSuffix}`} className="sr-only">
             Full name
@@ -280,7 +298,8 @@ export function FormCard({
         )}
 
         <button
-          type="submit"
+          type="button"
+          onClick={handleClick}
           disabled={!canSubmit || submitting || submitted}
           className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] disabled:opacity-60 disabled:cursor-not-allowed text-white px-6 py-3.5 rounded-lg font-bold text-base transition shadow-sm mt-1"
         >
