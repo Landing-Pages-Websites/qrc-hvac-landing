@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { useMegaLeadForm } from "@/hooks/useMegaLeadForm";
 import { BRAND, SERVICE_OPTIONS, type ServiceValue } from "@/lib/content";
 
@@ -100,10 +100,14 @@ export function FormCard({
       if (res?.ok !== true) {
         throw new Error("Submission not confirmed by server.");
       }
+      setSubmitted(true);
+      // Confirmed success only: dispatch the one native submit event so the Mega
+      // optimizer's capture-phase listener beacons form_submit exactly once for a
+      // real lead. Because the button is type="button", this is the page's only
+      // native submit, so a genuine lead stays exactly one conversion (no double count).
       formRef.current?.dispatchEvent(
         new Event("submit", { bubbles: true, cancelable: true }),
       );
-      setSubmitted(true);
     } catch (err) {
       console.error("Form submission failed:", err);
       setError(SUBMIT_ERROR_MESSAGE);
@@ -113,14 +117,26 @@ export function FormCard({
     }
   }
 
+  // Validate-first gate for the type="button" submit. The request path must NOT
+  // trigger a native form submit (neither a real button submit nor a programmatic
+  // one): the Mega optimizer installs a capture-phase document submit listener that
+  // beacons form_submit at click time, before the fetch resolves. A native submit
+  // here would bill an ads conversion for a lead that may still fail. The native
+  // submit fires only after confirmed success in runSubmit, keeping the form_submit
+  // beacon on the same fail-closed gate as the success card.
   function handleClick(): void {
-    const form = formRef.current;
-    if (!form) return;
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
+    if (submitting || submitted) return;
+    if (inFlightRef.current) return;
+    if (!canSubmit) return;
     void runSubmit();
+  }
+
+  function handleKeyDown(e: KeyboardEvent<HTMLFormElement>): void {
+    if (e.key !== "Enter") return;
+    const tag = (e.target as HTMLElement).tagName;
+    if (tag === "TEXTAREA" || tag === "BUTTON") return;
+    e.preventDefault();
+    handleClick();
   }
 
   const wrapperClass =
@@ -183,6 +199,7 @@ export function FormCard({
       <form
         ref={formRef}
         onSubmit={(e) => e.preventDefault()}
+        onKeyDown={handleKeyDown}
         noValidate
         className="space-y-3.5"
       >
