@@ -40,8 +40,19 @@ type Props = {
  * (per landing-page-builder Rule #12).
  */
 
+// Format a phone as the user types/pastes, WITHOUT losing digits. We detect a
+// leading NANP country code "1" (an 11+ digit string starting with 1) BEFORE
+// any slice, so the mandatory +15555550100 keeps all 11 digits and renders as
+// "+1 (555) 555-0100". Plain 10-digit NANP input renders "(336) 223-5887" as
+// before. (Valid 10-digit NANP area codes never start with 1, so a leading 1 is
+// unambiguously a country code.)
 function formatPhone(value: string): string {
-  const digits = value.replace(/\D/g, "").slice(0, 10);
+  const raw = value.replace(/\D/g, "");
+  if (raw.startsWith("1") && raw.length > 10) {
+    const local = raw.slice(1, 11);
+    return `+1 (${local.slice(0, 3)}) ${local.slice(3, 6)}-${local.slice(6)}`;
+  }
+  const digits = raw.slice(0, 10);
   if (digits.length === 0) return "";
   if (digits.length < 4) return `(${digits}`;
   if (digits.length < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
@@ -85,7 +96,9 @@ export function FormCard({
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const phoneDigits = phone.replace(/\D/g, "");
-  const phoneValid = phoneDigits.length === 10;
+  const phoneValid =
+    phoneDigits.length === 10 ||
+    (phoneDigits.length === 11 && phoneDigits.startsWith("1"));
   const canSubmit =
     name.trim().length >= 2 &&
     /@.+\./.test(email) &&
@@ -301,8 +314,8 @@ export function FormCard({
             inputMode="numeric"
             autoComplete="tel"
             required
-            pattern="\(\d{3}\) \d{3}-\d{4}"
-            title="Enter a 10-digit US phone number"
+            pattern="(\+1 )?\(\d{3}\) \d{3}-\d{4}"
+            title="Enter a 10-digit US phone number, e.g. (555) 555-5555 or +1 (555) 555-5555"
             placeholder="(555) 555-5555"
             value={phone}
             onChange={(e) => setPhone(formatPhone(e.target.value))}
