@@ -7,6 +7,15 @@ import { BRAND, SERVICE_OPTIONS, type ServiceValue } from "@/lib/content";
 const SUBMIT_ERROR_MESSAGE =
   "Something went wrong sending your request. Please try again, or email us at info@qrc123.com.";
 
+// Idle DOM shows a real semantic submit control; we flip the live button to a
+// plain "button" only for the instant an activation click propagates, so the
+// Mega optimizer's capture-phase click listener never sees a submit-button click.
+const SEMANTIC_SUBMIT_TYPE = "submit";
+const NEUTRAL_BUTTON_TYPE = "button";
+// Keys that synthesize a click on a focused button (Space fires on keyup, Enter
+// on keydown) — both dispatch the click we must pre-neutralize.
+const ACTIVATION_KEYS = new Set(["Enter", " "]);
+
 type Props = {
   variant?: "hero" | "card";
   heading?: string;
@@ -73,6 +82,7 @@ export function FormCard({
   const [error, setError] = useState<string | null>(null);
   const inFlightRef = useRef(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const phoneDigits = phone.replace(/\D/g, "");
   const phoneValid = phoneDigits.length === 10;
@@ -117,17 +127,54 @@ export function FormCard({
     }
   }
 
-  // Validate-first gate for the semantic type="submit" button. The request path
-  // must NOT trigger a native form submit before the lead API confirms success:
-  // the Mega optimizer installs a capture-phase document submit listener that
-  // beacons form_submit at click time, before the fetch resolves. A native submit
-  // here would bill an ads conversion for a lead that may still fail. We cancel the
-  // button click's default form-submission action first (preventDefault), then run
-  // the validated path. The native submit fires only after confirmed success in
-  // runSubmit, keeping the form_submit beacon on the same fail-closed gate as the
-  // success card.
+  // The Mega optimizer beacons form_submit on the semantic submit-button CLICK
+  // itself, from a document capture-phase listener that runs before React's
+  // bubble-phase onClick can preventDefault — and independent of the native
+  // submit event. So we neutralize the live button to type="button" on
+  // pointerdown / activation keydown, i.e. BEFORE the click the optimizer sees.
+  // The click then reads as a plain button click: no beacon, no native submit.
+  // This is an imperative DOM edit (no state change, no rerender); React's vdom
+  // still holds type="submit", so it never fights the flip.
+  function neutralizeSubmitType(): void {
+    const button = buttonRef.current;
+    if (!button) return;
+    if (submitting || submitted) return;
+    button.type = NEUTRAL_BUTTON_TYPE;
+  }
+
+  // Re-arm the semantic submit control AFTER the activation event has finished
+  // propagating (deferred past the click's default action so no native submit
+  // fires while the type is briefly "submit" again). Idle DOM checks then see
+  // exactly one enabled type="submit" button.
+  function restoreSubmitType(): void {
+    window.setTimeout(() => {
+      const button = buttonRef.current;
+      if (button) button.type = SEMANTIC_SUBMIT_TYPE;
+    }, 0);
+  }
+
+  function handlePointerDown(): void {
+    neutralizeSubmitType();
+  }
+
+  // Space/Enter on the focused button synthesizes a click; neutralize on keydown,
+  // before that click reaches the optimizer. The click's restoreSubmitType re-arms.
+  function handleButtonKeyDown(e: KeyboardEvent<HTMLButtonElement>): void {
+    if (!ACTIVATION_KEYS.has(e.key)) return;
+    neutralizeSubmitType();
+  }
+
+  // A cancelled pointer gesture never produces a click, so re-arm defensively.
+  function handlePointerCancel(): void {
+    restoreSubmitType();
+  }
+
+  // Validate-first gate. runSubmit dispatches the one native submit event only
+  // after confirmed {ok:true}, keeping the success beacon on the same fail-closed
+  // gate as the success card. We always re-arm the button type on this click.
   function handleClick(e: MouseEvent<HTMLButtonElement>): void {
     e.preventDefault();
+    restoreSubmitType();
     if (submitting || submitted) return;
     if (inFlightRef.current) return;
     if (!canSubmit) return;
@@ -321,7 +368,11 @@ export function FormCard({
         )}
 
         <button
+          ref={buttonRef}
           type="submit"
+          onPointerDown={handlePointerDown}
+          onPointerCancel={handlePointerCancel}
+          onKeyDown={handleButtonKeyDown}
           onClick={handleClick}
           disabled={submitting || submitted}
           className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] disabled:opacity-60 disabled:cursor-not-allowed text-white px-6 py-3.5 rounded-lg font-bold text-base transition shadow-sm mt-1"
