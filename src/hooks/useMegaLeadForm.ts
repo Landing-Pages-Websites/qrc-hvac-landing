@@ -189,8 +189,13 @@ export function useMegaLeadForm(
       // Defense-in-depth phone validation
       if (formData.phone) {
         const phoneDigits = String(formData.phone).replace(/\D/g, "");
-        if (phoneDigits.length !== 10) {
-          throw new Error("Phone must be exactly 10 digits");
+        const isTenDigit = phoneDigits.length === 10;
+        const isElevenDigitUS =
+          phoneDigits.length === 11 && phoneDigits.startsWith("1");
+        if (!isTenDigit && !isElevenDigitUS) {
+          throw new Error(
+            "Phone must be 10 digits, or 11 digits starting with 1",
+          );
         }
         formData.phone = phoneDigits;
       }
