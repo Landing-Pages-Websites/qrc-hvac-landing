@@ -31,7 +31,7 @@ export function HeroSection() {
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-start">
-          <Reveal className="space-y-5 lg:pt-6 relative">
+          <Reveal className="order-2 lg:order-1 space-y-5 lg:pt-6 relative">
             <p className="eyebrow eyebrow-on-dark">
               Since {BRAND.since} · Winston-Salem, NC
             </p>
@@ -152,7 +152,7 @@ export function HeroSection() {
             <DualCTA align="start" variant="onDark" className="!mt-6" />
           </Reveal>
 
-          <Reveal delay={150} className="lg:pt-0">
+          <Reveal delay={150} className="order-1 lg:order-2 lg:pt-0">
             <FormCard variant="hero" idSuffix="hero" />
           </Reveal>
         </div>

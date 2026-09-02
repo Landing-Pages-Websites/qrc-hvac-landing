@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
 import { useMegaLeadForm } from "@/hooks/useMegaLeadForm";
 import { BRAND, SERVICE_OPTIONS, type ServiceValue } from "@/lib/content";
 
@@ -117,14 +117,17 @@ export function FormCard({
     }
   }
 
-  // Validate-first gate for the type="button" submit. The request path must NOT
-  // trigger a native form submit (neither a real button submit nor a programmatic
-  // one): the Mega optimizer installs a capture-phase document submit listener that
+  // Validate-first gate for the semantic type="submit" button. The request path
+  // must NOT trigger a native form submit before the lead API confirms success:
+  // the Mega optimizer installs a capture-phase document submit listener that
   // beacons form_submit at click time, before the fetch resolves. A native submit
-  // here would bill an ads conversion for a lead that may still fail. The native
-  // submit fires only after confirmed success in runSubmit, keeping the form_submit
-  // beacon on the same fail-closed gate as the success card.
-  function handleClick(): void {
+  // here would bill an ads conversion for a lead that may still fail. We cancel the
+  // button click's default form-submission action first (preventDefault), then run
+  // the validated path. The native submit fires only after confirmed success in
+  // runSubmit, keeping the form_submit beacon on the same fail-closed gate as the
+  // success card.
+  function handleClick(e: MouseEvent<HTMLButtonElement>): void {
+    e.preventDefault();
     if (submitting || submitted) return;
     if (inFlightRef.current) return;
     if (!canSubmit) return;
@@ -136,7 +139,10 @@ export function FormCard({
     const tag = (e.target as HTMLElement).tagName;
     if (tag === "TEXTAREA" || tag === "BUTTON") return;
     e.preventDefault();
-    handleClick();
+    if (submitting || submitted) return;
+    if (inFlightRef.current) return;
+    if (!canSubmit) return;
+    void runSubmit();
   }
 
   const wrapperClass =
@@ -315,9 +321,9 @@ export function FormCard({
         )}
 
         <button
-          type="button"
+          type="submit"
           onClick={handleClick}
-          disabled={!canSubmit || submitting || submitted}
+          disabled={submitting || submitted}
           className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] disabled:opacity-60 disabled:cursor-not-allowed text-white px-6 py-3.5 rounded-lg font-bold text-base transition shadow-sm mt-1"
         >
           {submitting ? "Submitting…" : "Submit Request"}
