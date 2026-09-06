@@ -77,7 +77,7 @@ const ChevronDown = () => (
 export function FormCard({
   variant = "card",
   heading = "Schedule service now",
-  subheading = "Tell us what's going on and a QRC expert will follow up shortly. 24/7 emergency response available.",
+  subheading = "Need AC repair, HVAC installation, or commercial refrigeration service in Winston-Salem? Tell us what's going on and a QRC expert will follow up shortly.",
   idSuffix = "main",
 }: Props) {
   const { submit } = useMegaLeadForm();
